@@ -27,6 +27,11 @@ Initial release. Requires Java 21. Built on flat2java 0.1.0 and Spring Boot 3.5.
   timestamp. Record and object errors are `400`, an invalid mapping or an unexpected exception is
   `500` with a generic message. The errors that Spring MVC raises (`404`, `405`, `415`, a malformed
   body) use the same shape.
+- A startup banner with the versions of the application, flat2java, Spring Boot and Java, and a
+  "Ready" report with the addresses of the Swagger UI, the OpenAPI document and the health check.
+- A console log with aligned columns (time, level, request ID, class, message) and colors where
+  the terminal supports them. The framework messages of the startup are silenced, and a browser
+  asking for `/favicon.ico` is not a warning.
 - A request ID in every log line of a request, in the `X-Request-Id` response header and in error
   responses. Only lengths are logged, never the contents of a record.
 - A 64 KB limit for request bodies, also for bodies without a `Content-Length`, and

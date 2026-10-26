@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.Instant;
 
@@ -100,7 +101,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
             WebRequest request) {
         HttpStatus status = HttpStatus.valueOf(statusCode.value());
         ResponseEntity<ErrorResponse> response;
-        if (status.is5xxServerError()) {
+        if (e instanceof NoResourceFoundException) {
+            // A browser asks for /favicon.ico on every visit; that is not worth a warning.
+            log.debug("Not Found: {}", e.getMessage());
+            response = response(status, status.getReasonPhrase(), clientMessage(e, status));
+        } else if (status.is5xxServerError()) {
             response = serverError("Internal Server Error", e);
         } else {
             response = clientError(status, status.getReasonPhrase(), clientMessage(e, status));

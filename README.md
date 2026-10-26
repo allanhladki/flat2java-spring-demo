@@ -32,6 +32,7 @@ endpoint.
 
 - [Requirements](#requirements)
 - [Quick start](#quick-start)
+- [Startup](#startup)
 - [Endpoints](#endpoints)
 - [Record layout](#record-layout)
 - [Errors](#errors)
@@ -102,6 +103,29 @@ curl -X POST http://localhost:8080/read \
   "tags": ["new", "vip"],
   "internalNote": null
 }
+```
+
+## Startup
+
+The application prints a banner with its version and the versions of flat2java, Spring Boot and
+Java, then a "Ready" report with the addresses of the Swagger UI, the OpenAPI document and the
+health check, and a `curl` command to try:
+
+```text
+  __  _         _    ____     _
+ / _|| |  __ _ | |_ |___ \   (_)  __ _ __   __  __ _
+| |_ | | / _` || __|  __) |  | | / _` |\ \ / / / _` |
+|  _|| || (_| || |_  / __/   | || (_| | \ V / | (_| |
+|_|  |_| \__,_| \__||_____| _/ | \__,_|  \_/   \__,_|
+                           |__/
+
+  Spring Boot demo 0.1.0-SNAPSHOT  |  flat2java 0.1.0  |  Spring Boot 3.5.16  |  Java 21.0.7  |  profile default
+
+2026-10-26 13:24:24.628  INFO          StartupReport              | Ready in 2.7 s
+2026-10-26 13:24:24.628  INFO          StartupReport              |   Swagger UI  http://localhost:8080/swagger-ui
+2026-10-26 13:24:24.629  INFO          StartupReport              |   OpenAPI     http://localhost:8080/swagger.yaml
+2026-10-26 13:24:24.629  INFO          StartupReport              |   Health      http://localhost:8080/health
+2026-10-26 13:24:24.629  INFO          StartupReport              |   Try it      curl -X POST http://localhost:8080/read --data-binary @samples/typical.txt
 ```
 
 ## Endpoints
@@ -215,12 +239,15 @@ Errors are returned as JSON:
 | Invalid `@FlatField` mapping or any unexpected exception | 500 | `Flat2Java Error` or `Internal Server Error`, with a generic message |
 
 Messages name the field, never its value, so they can be logged. Every response, including errors,
-has an `X-Request-Id` header. The same ID is the `requestId` of the error and appears in every log
-line of the request:
+has an `X-Request-Id` header. The same ID is the `requestId` of the error, and its first 8
+characters appear in every log line of the request:
 
 ```text
-2026-10-26 11:38:05.816 [a30d30a9-...] WARN  (i.g.a.f.s.d.e.ApiExceptionHandler): Deserialization Error: ...
+2026-10-26 13:24:25.155  WARN efda5e8e ApiExceptionHandler        | Deserialization Error: SampleModel: expected a record of 315 characters, got 5
 ```
+
+The columns are the time, the level, the request ID (empty outside a request), the class and the
+message. The terminal gets colors when it supports them.
 
 The application never logs the contents of a record.
 
@@ -235,6 +262,7 @@ The application never logs the contents of a record.
 | `springdoc.api-docs.path` | `/swagger` | OpenAPI document path (JSON; the YAML is at `/swagger.yaml`) |
 | `springdoc.swagger-ui.path` | `/swagger-ui` | Swagger UI path |
 | `management.endpoints.web.base-path` | `/` | Serves the health checks at the root instead of `/actuator` |
+| `logging.pattern.console` | columns, with colors | Time, level, request ID, class and message; framework messages of the startup are silenced |
 | `logging.level.io.github.allanhladki` | `INFO` (`DEBUG` with the `dev` profile) | Application log level |
 | `flat2java.fail-on-string-truncation` | `true` | A text longer than its column is an error; the library default is `false` |
 | other `flat2java.*` | the defaults of `flat2java-spring` | [flat2java options](https://github.com/allanhladki/flat2java/blob/master/flat2java-spring/README.md#properties) |
@@ -285,7 +313,7 @@ Assured:
 ```text
 src/main/java/io/github/allanhladki/flat2java/spring/demo/
 ├── api/         FlatFileController (the endpoints) and ApiExamples (the Swagger examples)
-├── config/      WebConfig (UTF-8 for text/plain) and OpenApiConfig (OpenAPI info)
+├── config/      WebConfig (UTF-8 for text/plain), OpenApiConfig, StartupBanner and StartupReport
 ├── exception/   ApiExceptionHandler: exceptions to JSON error responses
 ├── filter/      RequestIdFilter (request ID in the log, header and errors) and BodySizeLimitFilter
 ├── model/       SampleModel, BaseRecord, Address, Contact, Item and ErrorResponse
