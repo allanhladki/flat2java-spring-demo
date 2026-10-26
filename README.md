@@ -65,7 +65,8 @@ cd flat2java-spring-demo
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
-The application listens on `http://localhost:8080`. Open the Swagger UI at
+The application listens on `http://localhost:8080`, whose home page has the links, the versions and a
+playground that reads the sample record and writes it back. Open the Swagger UI at
 `http://localhost:8080/swagger-ui`: every endpoint has a list of named examples in its request body
 or `path` parameter. Pick one, press **Execute**, and compare the request and the response. The
 examples named `invalid-length` and `negative-number` fail on purpose, to show the error responses.
@@ -135,9 +136,11 @@ health check, and a `curl` command to try:
 | `POST /read` | `text/plain`, one record | `application/json` | Reads a record into a `SampleModel` |
 | `POST /write` | `application/json`, a `SampleModel` | `text/plain; charset=UTF-8` | Writes a `SampleModel` as a record |
 | `GET /file?path=<path>` | Query parameter `path` | `application/json` | Reads the file at `path` as one record |
+| `GET /` | | HTML | Home page with links, versions and a read/write playground |
 | `GET /swagger` | | OpenAPI document (JSON; YAML at `/swagger.yaml`) | API description |
 | `GET /swagger-ui` | | HTML | Swagger UI |
 | `GET /health`, `/health/live`, `/health/ready` | | `application/json` | Spring Boot Actuator health checks |
+| `GET /info` | | `application/json` | Versions of the application, flat2java, Spring Boot and Java |
 
 The names follow the library: `read` turns a record into an object, `write` turns an object into a
 record.
@@ -318,6 +321,7 @@ src/main/java/io/github/allanhladki/flat2java/spring/demo/
 ├── filter/      RequestIdFilter (request ID in the log, header and errors) and BodySizeLimitFilter
 ├── model/       SampleModel, BaseRecord, Address, Contact, Item and ErrorResponse
 └── service/     FlatFileService: calls flat2java and reads files
+src/main/resources/static/  index.html, the home page
 samples/         Example records, one per file
 Dockerfile       JVM image
 ```

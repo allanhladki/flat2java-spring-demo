@@ -27,6 +27,8 @@ Initial release. Requires Java 21. Built on flat2java 0.1.0 and Spring Boot 3.5.
   timestamp. Record and object errors are `400`, an invalid mapping or an unexpected exception is
   `500` with a generic message. The errors that Spring MVC raises (`404`, `405`, `415`, a malformed
   body) use the same shape.
+- A home page at `/` with links, the versions and a playground that calls `/read` and `/write`.
+  It has no external resources. `/info` reports the versions it shows.
 - A startup banner with the versions of the application, flat2java, Spring Boot and Java, and a
   "Ready" report with the addresses of the Swagger UI, the OpenAPI document and the health check.
 - A console log with aligned columns (time, level, request ID, class, message) and colors where
