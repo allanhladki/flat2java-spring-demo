@@ -23,7 +23,7 @@ class StartupBannerTest {
                         new PrintStream(bytes, true, StandardCharsets.UTF_8));
 
         assertThat(bytes.toString(StandardCharsets.UTF_8))
-                .contains("|_|  |_|")
+                .contains("|  $$$$$$\\|  $$$$$$\\")
                 .contains("flat2java 0.1.0")
                 .contains("Spring Boot " + SpringBootVersion.getVersion())
                 .contains("Java " + System.getProperty("java.version"))
