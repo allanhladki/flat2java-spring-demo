@@ -1,0 +1,4 @@
+# Normalize line endings; the Windows wrapper script keeps CRLF.
+* text=auto eol=lf
+*.cmd text eol=crlf
+mvnw text eol=lf

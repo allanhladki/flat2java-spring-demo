@@ -1,0 +1,41 @@
+# Build output
+target/
+
+# Compiled classes and packages
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Logs and JVM crash files
+*.log
+hs_err_pid*
+replay_pid*
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+*.ctxt
+.mtj.tmp/
+
+# Spring Boot
+HELP.md
+.sts4-cache/
+
+# Environment files
+.env
+
+# Local AI assistant notes and planning (kept out of the repository)
+CLAUDE.md
+docs/planning/
+PROJECT_REVIEW.md
+TODO.md

@@ -1,0 +1,17 @@
+name: Feature request
+description: A flat2java feature or Spring Boot integration that the demo does not show yet.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: scenario
+    attributes:
+      label: Scenario
+      description: What the demo should show, and why it is useful to other flat2java users.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed example
+      description: Endpoint, mapped class or configuration you have in mind.
+      render: java
