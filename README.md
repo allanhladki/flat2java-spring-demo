@@ -126,7 +126,7 @@ health check, and a `curl` command to try:
                     \$$    $$                  | $$                               \$$    $$
                      \$$$$$$                    \$$                                \$$$$$$
 
-  Spring Boot demo 0.1.0-SNAPSHOT  |  flat2java 0.1.0  |  Spring Boot 3.5.16  |  Java 21.0.7  |  profile default
+  Spring Boot demo 0.1.0  |  flat2java 0.1.0  |  Spring Boot 3.5.16  |  Java 21.0.7  |  profile default
 
 2026-10-26 13:24:24.628  INFO          StartupReport              | Ready in 2.7 s
 2026-10-26 13:24:24.628  INFO          StartupReport              |   Swagger UI  http://localhost:8080/swagger-ui

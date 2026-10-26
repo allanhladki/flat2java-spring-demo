@@ -2,9 +2,9 @@
 
 All notable changes to this project are documented in this file. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
-[Semantic Versioning](https://semver.org/). Versions follow the flat2java version they demonstrate.
+[Semantic Versioning](https://semver.org/). Each version states the flat2java version it is built on.
 
-## [Unreleased]
+## [0.1.0] - 2026-10-26
 
 Initial release. Requires Java 21. Built on flat2java 0.1.0 and Spring Boot 3.5.
 
@@ -57,3 +57,5 @@ Initial release. Requires Java 21. Built on flat2java 0.1.0 and Spring Boot 3.5.
 - CI that runs the tests and builds and starts the JVM image on every pull request.
 - Release workflow that creates a signed tag and a GitHub release from a pull request labeled
   `release`.
+
+[0.1.0]: https://github.com/allanhladki/flat2java-spring-demo/releases/tag/v0.1.0

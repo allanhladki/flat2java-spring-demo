@@ -13,7 +13,7 @@
 
     <groupId>io.github.allanhladki.flat2java</groupId>
     <artifactId>flat2java-spring-demo</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <name>flat2java Spring Boot demo</name>
     <description>Spring Boot application that reads and writes fixed-width records with flat2java.</description>
